@@ -50,6 +50,44 @@ $time = date('Y-m-d H:i:s');
             z-index: 2;
             opacity: 0;
             transform: translateY(50px);
+            overflow: hidden;
+        }
+        .slideshow {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+        }
+        .slides-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .slide {
+            position: absolute;
+            top: -10%; left: -10%; width: 120%; height: 120%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slide.active {
+            opacity: 0.7;
+        }
+        .slide-overlay {
+            position: absolute;
+            bottom: 15px; left: 15px;
+            color: #00ffcc;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(5, 5, 12, 0.8);
+            padding: 4px 8px;
+            border-left: 3px solid #ff00ff;
+            pointer-events: none;
+            z-index: 3;
         }
         h1 {
             margin-top: 0;
@@ -86,6 +124,14 @@ $time = date('Y-m-d H:i:s');
 <body>
 <div class="bg-particles" id="particles"></div>
 <main class="card">
+    <div class="slideshow" id="slideshow-container">
+        <div class="slides-wrap">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=800');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800');"></div>
+        </div>
+        <div class="slide-overlay" id="slide-title">GENESIS PROJECT</div>
+    </div>
     <span class="ok">SYSTEM ONLINE</span>
     <h1>PHP Vercel Deployment</h1>
     <p>starter sederhana vercel-php aktif.</p>
@@ -141,6 +187,61 @@ $time = date('Y-m-d H:i:s');
         delay: anime.stagger(150, {start: 500}),
         easing: 'easeOutQuad'
     });
+
+    // Slideshow + Parallax Effect
+    const slides = document.querySelectorAll('.slide');
+    const titles = ['GENESIS PROJECT', 'CYBERPUNK CODES', 'NEO MATRIX'];
+    const slideTitle = document.getElementById('slide-title');
+    const slideshowContainer = document.getElementById('slideshow-container');
+    let currentSlide = 0;
+
+    // Mousemove parallax
+    slideshowContainer.addEventListener('mousemove', (e) => {
+        const rect = slideshowContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left - (rect.width / 2);
+        const y = e.clientY - rect.top - (rect.height / 2);
+
+        anime({
+            targets: '.slide.active',
+            translateX: x * 0.1,
+            translateY: y * 0.1,
+            duration: 100,
+            easing: 'easeOutQuad'
+        });
+    });
+
+    // Reset parallax on leave
+    slideshowContainer.addEventListener('mouseleave', () => {
+        anime({
+            targets: '.slide',
+            translateX: 0,
+            translateY: 0,
+            duration: 500,
+            easing: 'easeOutQuad'
+        });
+    });
+
+    function nextSlide() {
+        const active = document.querySelector('.slide.active');
+        active.classList.remove('active');
+
+        // Reset translation of previous slide
+        anime.set(active, {translateX: 0, translateY: 0});
+
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+        slideTitle.innerText = titles[currentSlide];
+
+        // Entrance scale animation (simulated depth/parallax)
+        anime({
+            targets: slides[currentSlide],
+            scale: [1.2, 1],
+            duration: 1200,
+            easing: 'easeOutQuad'
+        });
+    }
+
+    setInterval(nextSlide, 5000);
 </script>
 </body>
 </html>
