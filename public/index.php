@@ -15,8 +15,8 @@ $appEnv = getenv('APP_ENV') ?: 'production';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/favicon.png">
-    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="icon" type="assets/image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="assets/images/favicon.png">
 
     <title>Portable PHP App</title>
 
@@ -40,7 +40,7 @@ $appEnv = getenv('APP_ENV') ?: 'production';
 <div class="bg-particles" id="particles"></div>
 <main class="card">
     <div class="brand">
-        <img src="/images/logo.png" alt="Logo" loading="eager">
+        <img src="assets/images/logo.png" alt="Logo" loading="eager">
     </div>
 
     <span class="ok">SYSTEM ONLINE</span>
