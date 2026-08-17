@@ -40,7 +40,7 @@ $appEnv = getenv('APP_ENV') ?: 'production';
 <div class="bg-particles" id="particles"></div>
 <main class="card">
     <div class="brand">
-        <img src="assets/images/logo.png" alt="Logo" loading="eager">
+        <img src="assets/images/logo.svg" alt="Logo" loading="eager">
     </div>
 
     <span class="ok">SYSTEM ONLINE</span>
