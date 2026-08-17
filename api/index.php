@@ -1,3 +1,3 @@
 <?php
-// Thin Vercel adapter. Application code remains portable.
-require __DIR__ . '/../public/index.php';
+// Thin Vercel adapter. The application document root is /publik.
+require __DIR__ . '/../publik/index.php';
