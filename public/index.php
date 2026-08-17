@@ -7,20 +7,27 @@ $phpVersion = PHP_VERSION;
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $time = date('Y-m-d H:i:s');
 $appEnv = getenv('APP_ENV') ?: 'production';
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="shortcut icon" href="/images/favicon.png">
+
     <title>Portable PHP App</title>
+
     <style>
         * { box-sizing: border-box; }
         body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; font-family:'Courier New',monospace; background:#05050c; color:#00ffcc; overflow:hidden; position:relative; }
         .bg-particles { position:absolute; inset:0; z-index:1; pointer-events:none; }
         .particle { position:absolute; background:rgba(0,255,204,.3); border-radius:50%; }
         .card { width:min(680px,100%); background:rgba(10,10,25,.85); border:1px solid #00ffcc; border-radius:18px; padding:32px; box-shadow:0 0 20px rgba(0,255,204,.2), inset 0 0 15px rgba(0,255,204,.1); backdrop-filter:blur(10px); z-index:2; opacity:0; transform:translateY(50px); }
+        .brand { display:flex; justify-content:center; margin-bottom:20px; }
+        .brand img { display:block; width:auto; max-width:260px; max-height:100px; object-fit:contain; }
         .ok { display:inline-block; padding:8px 16px; border-radius:4px; background:rgba(0,255,204,.1); border:1px solid #00ffcc; font-weight:700; letter-spacing:1px; margin-bottom:15px; }
         h1 { margin-top:0; font-size:1.8rem; letter-spacing:2px; }
         table { width:100%; border-collapse:collapse; margin-top:24px; }
@@ -32,6 +39,10 @@ $appEnv = getenv('APP_ENV') ?: 'production';
 <body>
 <div class="bg-particles" id="particles"></div>
 <main class="card">
+    <div class="brand">
+        <img src="/images/logo.png" alt="Logo" loading="eager">
+    </div>
+
     <span class="ok">SYSTEM ONLINE</span>
     <h1>Portable PHP Application</h1>
     <p>Aplikasi PHP ini menggunakan <strong>public/</strong> sebagai document root.</p>
